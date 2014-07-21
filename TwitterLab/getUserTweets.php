@@ -41,7 +41,7 @@ foreach ($tweets as $line) { // step through each returned tweet
     echo $outputTweet; // echo the tweet
 }
 
-// get_bananas();
+get_bananas();
 
 // DEBUG
 echo '<br /><img src="test.gif">'; // if this line returns an image, PHP is writing properly AND permisions are OK. Probabaly.
