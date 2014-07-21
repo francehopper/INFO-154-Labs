@@ -50,15 +50,28 @@ function fetchTweets($userName) {
         'consumer_key' => "aqEWrdsZtvnWskYXZe0Ui1dAs",
         'consumer_secret' => "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt"
     );
-    function connectToTwitter($settings) {
-        $twitterConnection = new TwitterAPIExchange($settings);
-        return $twitterConnection;
-    }
+    // function connectToTwitter($settings) {
+    //     $twitterConnection = new TwitterAPIExchange($settings);
+    //     return $twitterConnection;
+    // }
 
-    // $twitterConnection = connectToTwitter($settings);
-    $twitterConnection = new TwitterAPIExchange($settings);
-    $userTweets = $twitterConnection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$userName."&count=".$notweets);
+    // // $twitterConnection = connectToTwitter($settings);
+    // $twitterConnection = new TwitterAPIExchange($settings);
+    // $userTweets = $twitterConnection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$userName."&count=".$notweets);
 
+    // define what we're going to fetch
+    $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'; // define JSON URL hook
+    $getfield = '?screen_name=".$userName."&count=".$fetchLimit'; // define what we want to get from Twitter
+    $requestMethod = 'GET'; // define request method
+
+    // talk to Twitter
+    $twitter = new TwitterAPIExchange($settings); // establish connection to Twitter with our API key
+    $response = $twitter->setGetfield($getfield) // get lookup item
+        ->buildOauth($url, $requestMethod) // get URL hook and request method
+        ->performRequest(); // send request to Twitter
+    // hope it works
+
+    return ($result);
 }
 
 
