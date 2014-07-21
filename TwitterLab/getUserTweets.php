@@ -10,7 +10,8 @@
 
 
 // loop in the brilliant Twitter API PHP (https://github.com/J7mbo/twitter-api-php)
-require_once('TwitterAPIExchange.php'); // this must be in the same directory as this file!
+// require_once('TwitterAPIExchange.php'); // this must be in the same directory as this file!
+require_once('oauth/twitteroauth/twittoauth.php'); // changing to OAuth
 $userName = "francehopper"; // hardcoded for now because it's easier. Deal with it.
 
 // // Configure API tokens
@@ -40,39 +41,88 @@ $userName = "francehopper"; // hardcoded for now because it's easier. Deal with 
 
 
 // new function-based code (aka untested shit)
-function fetchTweets($userName) {
-    // since JSON will eventually hit a limit, let's limit our results to 20 tweets
-    $fetchLimit = 20;
-    // don't be a dick and steal my API keys. I will find you.
-    $settings = array(
-        'oauth_access_token' => "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg",
-        'oauth_access_token_secret' => "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO",
-        'consumer_key' => "aqEWrdsZtvnWskYXZe0Ui1dAs",
-        'consumer_secret' => "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt"
-    );
-    // function connectToTwitter($settings) {
-    //     $twitterConnection = new TwitterAPIExchange($settings);
-    //     return $twitterConnection;
-    // }
-
-    // // $twitterConnection = connectToTwitter($settings);
-    // $twitterConnection = new TwitterAPIExchange($settings);
-    // $userTweets = $twitterConnection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$userName."&count=".$notweets);
-
-    // define what we're going to fetch
-    $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'; // define JSON URL hook
-    $getfield = '?screen_name=".$userName."&count=".$fetchLimit'; // define what we want to get from Twitter
-    $requestMethod = 'GET'; // define request method
-
-    // talk to Twitter
-    $twitter = new TwitterAPIExchange($settings); // establish connection to Twitter with our API key
-    $response = $twitter->setGetfield($getfield) // get lookup item
-        ->buildOauth($url, $requestMethod) // get URL hook and request method
-        ->performRequest(); // send request to Twitter
-    // hope it works
-
-    return ($response);
+function getTweets($userName) { 
+    $returnedTweetsLimit = 20; // limit the number of returned tweets since JSON will hit a limit eventually anyway
+    // don't be a dick by stealing my keys
+    $consumerkey = "aqEWrdsZtvnWskYXZe0Ui1dAs";
+    $consumersecret = "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt";
+    $accesstoken = "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg";
+    $accesstokensecret = "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO";
+      
+    function getConnectionWithAccessToken($cons_key, $cons_secret, $oauth_token, $oauth_token_secret) {
+      $connection = new TwitterOAuth($cons_key, $cons_secret, $oauth_token, $oauth_token_secret);
+      return $connection;
+    }
+       
+    $connection = getConnectionWithAccessToken($consumerkey, $consumersecret, $accesstoken, $accesstokensecret);
+    $tweets = $connection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$userName."&count=".$returnedTweetsLimit);
+     
+    return ($tweets);
 }
+
+$tweets = getTweets($userName);
+foreach ($tweets as $line){
+    $status = $line->text;
+    $tweetTime =  $line->created_at;
+    $tweetId = $line->id_str;
+    $outputTweet = '<li>'.$status.'</span> <a style="font-size:85%" href="http://twitter.com/'.$userName.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>';
+    echo $outputTweet;    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function fetchTweets($userName) {
+//     // since JSON will eventually hit a limit, let's limit our results to 20 tweets
+//     $fetchLimit = 20;
+//     // don't be a dick and steal my API keys. I will find you.
+//     $settings = array(
+//         'oauth_access_token' => "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg",
+//         'oauth_access_token_secret' => "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO",
+//         'consumer_key' => "aqEWrdsZtvnWskYXZe0Ui1dAs",
+//         'consumer_secret' => "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt"
+//     );
+//     // function connectToTwitter($settings) {
+//     //     $twitterConnection = new TwitterAPIExchange($settings);
+//     //     return $twitterConnection;
+//     // }
+
+//     // // $twitterConnection = connectToTwitter($settings);
+//     // $twitterConnection = new TwitterAPIExchange($settings);
+//     // $userTweets = $twitterConnection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$userName."&count=".$notweets);
+
+//     // define what we're going to fetch
+//     $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'; // define JSON URL hook
+//     $getfield = '?screen_name=".$userName."&count=".$fetchLimit'; // define what we want to get from Twitter
+//     $requestMethod = 'GET'; // define request method
+
+//     // talk to Twitter
+//     $twitter = new TwitterAPIExchange($settings); // establish connection to Twitter with our API key
+//     $response = $twitter->setGetfield($getfield) // get lookup item
+//         ->buildOauth($url, $requestMethod) // get URL hook and request method
+//         ->performRequest(); // send request to Twitter
+//     // hope it works
+
+//     return ($response);
+// }
 
 
 
@@ -95,14 +145,14 @@ function fetchTweets($userName) {
 //     return ($tweets);
 // }
 
-$tweets = fetchTweets($userName);
-foreach ($tweets as $line){
-    $status = $line->text;
-    $tweetTime =  $line->created_at;
-    $tweetId = $line->id_str;
-    $outputTweet = '<li>'.$status.'</span> <a style="font-size:85%" href="http://twitter.com/'.$userName.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>';
-    echo $outputTweet;    
-}
+// $tweets = fetchTweets($userName);
+// foreach ($tweets as $line){
+//     $status = $line->text;
+//     $tweetTime =  $line->created_at;
+//     $tweetId = $line->id_str;
+//     $outputTweet = '<li>'.$status.'</span> <a style="font-size:85%" href="http://twitter.com/'.$userName.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>';
+//     echo $outputTweet;    
+// }
 
 
 
