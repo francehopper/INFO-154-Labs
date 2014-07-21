@@ -12,7 +12,7 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
 
 // new function-based code to fetch tweets
 // function getTweets($userName) { 
-    $returnedTweetsLimit = 20; // limit the number of returned tweets since JSON will hit a limit eventually anyway
+    // $returnedTweetsLimit = 20; // limit the number of returned tweets since JSON will hit a limit eventually anyway
     // don't be a dick by stealing my keys
     define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');
     define('CONSUMER_SECRET', 'VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt');
@@ -33,6 +33,7 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
   
     foreach ($results->statuses as $result) {
     echo $result->user->screen_name . ": " . $result->text . "\n";
+}
        
     // $connection = connectToTwitter($consumerkey, $consumersecret, $accesstoken, $accesstokensecret); // call Twitter connection function
     // // hopefully connection worked
