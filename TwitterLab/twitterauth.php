@@ -79,6 +79,7 @@ foreach (range(4, 3, -1) as $depth) {
 }
 // ...comment UNTIL this line to disable JSON error debug
 
+echo '<br /><img src="test.gif">'; // if this line returns an images, PHP is writing properly AND permisions are OK. Probabaly.
 ?>
 </body>
 </html>
