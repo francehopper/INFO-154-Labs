@@ -1,3 +1,5 @@
+
+<?php
 function get_bananas() {
     $i; //declare $i variable
         echo "<pre>
@@ -17,3 +19,4 @@ hh                `--..____..--' <pre> ";
 
 }
 
+?>
