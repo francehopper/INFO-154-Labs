@@ -36,7 +36,7 @@ Done by Gregory Woods
              // ->performRequest(); 
 
 // loop in the brilliant Twitter API PHP (https://github.com/J7mbo/twitter-api-php)
-require_once('TwitterAPIExchange.php');
+require_once('TwitterAPIExchange.php'); // this must be in the same directory as this file!
 
 // Configure API tokens
 $settings = array(
@@ -47,17 +47,22 @@ $settings = array(
 );
 
 // Try to get latest tweets
-$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-$getfield = '?screen_name=francehopper';
-$requestMethod = 'GET';
+$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'; // define JSON URL hook
+$getfield = '?screen_name=francehopper'; // define paramater
+$requestMethod = 'GET'; // define request method
 
-$twitter = new TwitterAPIExchange($settings);
-$response = $twitter->setGetfield($getfield)
-    ->buildOauth($url, $requestMethod)
-    ->performRequest();
-var_dump(json_decode($response));
+$twitter = new TwitterAPIExchange($settings); // spawn new request instance
+$response = $twitter->setGetfield($getfield) // get lookup item
+    ->buildOauth($url, $requestMethod) // get URL hook and method
+    ->performRequest(); // send request to Twitter
+var_dump(json_decode($response)); // dump the JSON responce
+// Note: on XAMPP, this will return NULL if your CURL is not up to date
+// see http://stackoverflow.com/questions/18574055/twitter-api-returns-null-on-xampp for fix
+// make sure you give read access to the cert!
 
 // debug JSON errors
+
+// to disable JSON error debug, comment from this line...
 // define JSON errors
 $constants = get_defined_constants(true);
 $json_errors = array();
@@ -69,8 +74,9 @@ foreach ($constants["json"] as $name => $value) {
 // Show the errors for different depths.
 foreach (range(4, 3, -1) as $depth) {
     var_dump(json_decode($response, true, $depth));
-    echo 'Last error: ', $json_errors[json_last_error()], PHP_EOL, PHP_EOL;
+    echo '<br />Last error: ', $json_errors[json_last_error()], PHP_EOL, PHP_EOL;
 }
+// ...comment UNTIL this line to disable JSON error debug
 
 ?>
 </body>
