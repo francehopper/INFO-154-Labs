@@ -71,7 +71,7 @@ function fetchTweets($userName) {
         ->performRequest(); // send request to Twitter
     // hope it works
 
-    return ($responce);
+    return ($response);
 }
 
 
