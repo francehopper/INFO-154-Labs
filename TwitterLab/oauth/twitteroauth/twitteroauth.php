@@ -200,8 +200,8 @@ class TwitterOAuth {
     curl_setopt($ci, CURLOPT_RETURNTRANSFER, TRUE);
     curl_setopt($ci, CURLOPT_HTTPHEADER, array('Expect:'));
     curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, $this->ssl_verifypeer);
-      curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 2);
-      curl_setopt($connection, CURLOPT_CAINFO, __DIR__."/ca-bundle.crt");
+      // curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 2);
+      // curl_setopt($connection, CURLOPT_CAINFO, __DIR__."/ca-bundle.crt");
     curl_setopt($ci, CURLOPT_HEADERFUNCTION, array($this, 'getHeader'));
     curl_setopt($ci, CURLOPT_HEADER, FALSE);
 
