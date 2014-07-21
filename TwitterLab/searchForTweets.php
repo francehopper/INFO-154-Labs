@@ -32,7 +32,7 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
     $tweets = runSearch($query);
 
   
-    foreach ($results->statuses as $result) {
+    foreach ($tweets->statuses as $result) {
     echo $result->user->screen_name . ": " . $result->text . "\n";
     }
        
