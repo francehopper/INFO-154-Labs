@@ -42,7 +42,7 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
     // return ($tweets);
 // }
 
-$tweets = getTweets($userName); // call the function to fetch user tweets
+// $tweets = getTweets($userName); // call the function to fetch user tweets
 foreach ($tweets as $line) { // step through each returned tweet
     $status = $line->text; // strip the Tweet from the JSON
     $tweetTime =  $line->created_at; // strip creation time from the JSON
