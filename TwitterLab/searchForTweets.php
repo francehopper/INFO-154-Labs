@@ -37,6 +37,7 @@
     }
 
     // DEBUG
+    echo '<p>Anything below this line is for debug purposes. Nothing to see here.</p><br />';
     echo '<br /><img src="test.gif">'; // if this line returns an image, PHP is writing properly AND permisions are OK. Probabaly.
 ?>
 </body>
