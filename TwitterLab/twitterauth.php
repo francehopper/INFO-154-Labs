@@ -39,6 +39,7 @@ Done by Gregory Woods
 require_once('TwitterAPIExchange.php'); // this must be in the same directory as this file!
 
 // Configure API tokens
+// thank you for not being an ass and stealing mine
 $settings = array(
     'oauth_access_token' => "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg",
     'oauth_access_token_secret' => "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO",
