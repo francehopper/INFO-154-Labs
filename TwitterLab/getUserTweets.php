@@ -11,7 +11,7 @@
 
 // loop in the brilliant Twitter API PHP (https://github.com/J7mbo/twitter-api-php)
 // require_once('TwitterAPIExchange.php'); // this must be in the same directory as this file!
-require_once('oauth/twitteroauth/twittoauth.php'); // changing to OAuth
+require_once('oauth/twitteroauth/twitteroauth.php'); // changing to OAuth
 $userName = "francehopper"; // hardcoded for now because it's easier. Deal with it.
 
 // // Configure API tokens
