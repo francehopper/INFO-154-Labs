@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php
-require_once('lab1.1.php');
+require('lab1.1.php');
 require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
 $userName = "francehopper"; // hardcoded for now because it's easier. Deal with it.
 
