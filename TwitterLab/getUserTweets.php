@@ -2,8 +2,6 @@
 <html>
 <head>
 <title>Twitter Lab > Get Tweets From A User</title>
-
-
 </head>
 <body>
 <?php
