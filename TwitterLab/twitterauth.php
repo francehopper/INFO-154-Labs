@@ -35,65 +35,41 @@ Done by Gregory Woods
              // ->buildOauth($url, $requestMethod)
              // ->performRequest(); 
 
-// require_once('TwitterAPIExchange.php');
+// loop in the brilliant Twitter API PHP (https://github.com/J7mbo/twitter-api-php)
+require_once('TwitterAPIExchange.php');
 
-// // Configure API tokens
-// $settings = array(
-//     'oauth_access_token' => "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg",
-//     'oauth_access_token_secret' => "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO",
-//     'consumer_key' => "aqEWrdsZtvnWskYXZe0Ui1dAs",
-//     'consumer_secret' => "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt"
-// );
+// Configure API tokens
+$settings = array(
+    'oauth_access_token' => "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg",
+    'oauth_access_token_secret' => "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO",
+    'consumer_key' => "aqEWrdsZtvnWskYXZe0Ui1dAs",
+    'consumer_secret' => "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt"
+);
 
-// // Test if we can get a list of followers
-// $url = 'https://api.twitter.com/1.1/followers/list.json';
-// $getfield = '?username=francehopper&skip_status=1';
-// $requestMethod = 'GET';
-// $twitter = new TwitterAPIExchange($settings);
-// echo $twitter->setGetfield($getfield)
-//              ->buildOauth($url, $requestMethod)
-//              ->performRequest();  
+// Try to get latest tweets
+$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+$getfield = '?screen_name=francehopper';
+$requestMethod = 'GET';
 
-# Load Twitter class
-require_once('twitteroauth-master/twitteroauth/TwitterOAuth.php');
+$twitter = new TwitterAPIExchange($settings);
+$response = $twitter->setGetfield($getfield)
+    ->buildOauth($url, $requestMethod)
+    ->performRequest();
+var_dump(json_decode($response));
 
-# Define constants
-define('TWEET_LIMIT', 5);
-define('TWITTER_USERNAME', 'francehopper');
-define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');
-define('CONSUMER_SECRET', 'VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt');
-define('ACCESS_TOKEN', '16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg');
-define('ACCESS_TOKEN_SECRET', 'F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO');
-
-# Create the connection
-$twitter = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
-
-# Migrate over to SSL/TLS
-$twitter->ssl_verifypeer = true;
-
-# Load the Tweets
-$tweets = $twitter->get('statuses/user_timeline', array('screen_name' => TWITTER_USERNAME, 'exclude_replies' => 'true', 'include_rts' => 'false', 'count' => TWEET_LIMIT));
-
-# Example output
-if(!empty($tweets)) {
-    foreach($tweets as $tweet) {
-
-        # Access as an object
-        $tweetText = $tweet['text'];
-
-        # Make links active
-        $tweetText = preg_replace("#(http://|(www.))(([^s<]{4,68})[^s<]*)#", '<a href="http://$2$3" target="_blank">$1$2$4</a>', $tweetText);
-
-        # Linkify user mentions
-        $tweetText = preg_replace("/@(w+)/", '<a href="http://www.twitter.com/$1" target="_blank">@$1</a>', $tweetText);
-
-        # Linkify tags
-        $tweetText = preg_replace("/#(w+)/", '<a href="http://search.twitter.com/search?q=$1" target="_blank">#$1</a>', $tweetText);
-
-        # Output
-        echo $tweetText;
-
+// debug JSON errors
+// define JSON errors
+$constants = get_defined_constants(true);
+$json_errors = array();
+foreach ($constants["json"] as $name => $value) {
+    if (!strncmp($name, "JSON_ERROR_", 11)) {
+        $json_errors[$value] = $name;
     }
+}
+// Show the errors for different depths.
+foreach (range(4, 3, -1) as $depth) {
+    var_dump(json_decode($response, true, $depth));
+    echo 'Last error: ', $json_errors[json_last_error()], PHP_EOL, PHP_EOL;
 }
 
 ?>
