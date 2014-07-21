@@ -30,6 +30,7 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
     );
 
     $tweets = runSearch($query);
+    var_dump(json_decode($tweets)); 
   
     // foreach ($results->statuses as $result) {
     // echo $result->user->screen_name . ": " . $result->text . "\n";
@@ -43,13 +44,13 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
 // }
 
 // $tweets = getTweets($userName); // call the function to fetch user tweets
-foreach ($tweets as $line) { // step through each returned tweet
-    $status = $line->text; // strip the Tweet from the JSON
-    $tweetTime =  $line->created_at; // strip creation time from the JSON
-    $tweetId = $line->id_str; // strip the tweet ID so we can link back to the source tweet
-    $outputTweet = '<li>'.$status.'</span> <a style="font-size:85%" href="http://twitter.com/'.$userName.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
-    echo $outputTweet; // echo the tweet
-}
+// foreach ($tweets as $line) { // step through each returned tweet
+//     $status = $line->text; // strip the Tweet from the JSON
+//     $tweetTime =  $line->created_at; // strip creation time from the JSON
+//     $tweetId = $line->id_str; // strip the tweet ID so we can link back to the source tweet
+//     $outputTweet = '<li>'.$status.'</span> <a style="font-size:85%" href="http://twitter.com/'.$userName.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
+//     echo $outputTweet; // echo the tweet
+// }
 
 // DEBUG
 echo '<br /><img src="test.gif">'; // if this line returns an image, PHP is writing properly AND permisions are OK. Probabaly.
