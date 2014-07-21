@@ -7,6 +7,7 @@
 </head>
 <body>
 <?php
+require_once('lab1.1.php')
 require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
 $userName = "francehopper"; // hardcoded for now because it's easier. Deal with it.
 
@@ -39,6 +40,8 @@ foreach ($tweets as $line) { // step through each returned tweet
     $outputTweet = '<li>'.$status.'</span> <a style="font-size:85%" href="http://twitter.com/'.$userName.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
     echo $outputTweet; // echo the tweet
 }
+
+get_bananas();
 
 // DEBUG
 echo '<br /><img src="test.gif">'; // if this line returns an image, PHP is writing properly AND permisions are OK. Probabaly.
