@@ -29,7 +29,7 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
       "q" => "$searchString",
     );
 
-    $results = search($query);
+    $results = runSearch($query);
   
     foreach ($results->statuses as $result) {
     echo $result->user->screen_name . ": " . $result->text . "\n";
