@@ -21,8 +21,8 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
       
     function runSearch(array $query)
     {
-      $toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
-      return $toa->get('search/tweets', $query);
+      $conectionToTwitter = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
+      return $conectionToTwitter->get('search/tweets', $query);
     }
 
     $query = array(
@@ -30,11 +30,11 @@ $searchString = "bananas"; // hardcoded for now because it's easier. Deal with i
     );
 
     $tweets = runSearch($query);
-    var_dump(json_decode($tweets)); 
+
   
-    // foreach ($results->statuses as $result) {
-    // echo $result->user->screen_name . ": " . $result->text . "\n";
-    // }
+    foreach ($results->statuses as $result) {
+    echo $result->user->screen_name . ": " . $result->text . "\n";
+    }
        
     // $connection = connectToTwitter($consumerkey, $consumersecret, $accesstoken, $accesstokensecret); // call Twitter connection function
     // // hopefully connection worked
