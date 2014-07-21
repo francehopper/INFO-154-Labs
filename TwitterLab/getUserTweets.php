@@ -51,7 +51,7 @@ function fetchTweets($userName) {
         'consumer_secret' => "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt"
     );
     function connectToTwitter($settings) {
-        $twitterConnection = new TwitterAPIExchange($settings)
+        $twitterConnection = new TwitterAPIExchange($settings);
         return $twitterConnection;
     }
 
