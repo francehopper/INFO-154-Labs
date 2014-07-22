@@ -6,7 +6,7 @@
 <body>
 <?php
     require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
-    $searchString = "bananas"; // hardcoded for now because it's easier. Deal with it.
+    $searchString = $_GET['userString']; // hardcoded for now because it's easier. Deal with it.
 
     // don't be a dick by stealing my keys
     define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');

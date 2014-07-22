@@ -1,4 +1,4 @@
-<doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="main.css">
@@ -10,10 +10,10 @@
 <div class="div">
 
 
-	<form name="input" action="getUserTweets.php" method="GET">
+	<form name="input">
 		<p class="search">Search Twitter</p> <input type="text" name="userString" class="input"><br>
-		<input type="submit" value="Search for Profile">
-		<input type="submit" value="Search For Tweet">
+		<input type="submit" value="Search for Profile" name="Profile" method="GET" formaction="getUserTweets.php" />
+		<input type="submit" value="Search For Tweet" name="Tweet" method="GET" formaction="searchForTweets.php"/>
 
 
 
