@@ -2,7 +2,7 @@
 <?php
 function get_bananas() {
     $i; //declare $i variable
-        echo "<pre>
+    echo "<pre>
 //\
 V  \
  \  \_
@@ -16,6 +16,7 @@ V  \
           `-_ `-.___        __,--'   ,'
              `-.__  `----\"\"\" __.-'
 hh                `--..____..--' <pre> ";
+
 
 }
 

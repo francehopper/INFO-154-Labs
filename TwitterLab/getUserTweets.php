@@ -76,8 +76,9 @@
 //     $foundUser = find_users($users);
 //     var_dump($foundUser);
     
-    echo "<p>Tweets by " . $userName . "</p>";
-    echo "<p>Note: If you see the message 'Notice: Trying to get property of non-object in...' you are probabaly looking for a user that doesn't exist. Please try again.</p>";
+    echo "<p><a href=\"home.html\"><- Return home</a></p>";
+    echo "<p>Tweets by <a href=\"http://twitter.com/".$userName."\">@" . $userName . "</a></p>";
+    echo "<p><strong>Note:</strong> If you see the message 'Notice: Trying to get property of non-object in...' you are probably looking for a user that doesn't exist. Please try again.</p>";
     $tweets = getTweets($userName); // call the function to fetch user tweets
     foreach ($tweets as $line) { // step through each returned tweet
         $status = $line->text; // strip the Tweet from the JSON
