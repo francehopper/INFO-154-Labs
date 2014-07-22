@@ -6,12 +6,17 @@
 <body>
 <?php
     // In loving memory of Gregory Woods' brain after realizing it was a XAMPP issue. And for the initial suffering and code shell.
-    require_once('banana.php');
+    // require_once('banana.php'); // debug
     require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
-    $userName = $_GET['userString'];
-    // $userName = "PlayStation"; // hardcoded for now because it's easier. Deal with it.
+    $userName = $_GET['userString']; // get the searched for user name
+    // don't be a dick by stealing my keys
+    define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');
+    define('CONSUMER_SECRET', 'VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt');
+    define('ACCESS_TOKEN', '16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg');
+    define('ACCESS_TOKEN_SECRET', 'F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO');
+    
 
-    // new function-based code to fetch tweets
+    // get the user's tweets
     function getTweets($userName) { 
         $returnedTweetsLimit = 20; // limit the number of returned tweets since JSON will hit a limit eventually anyway
         // don't be a dick by stealing my keys
@@ -20,17 +25,54 @@
         $accesstoken = "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg";
         $accesstokensecret = "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO";
           
-        function connectToTwitter($cons_key, $cons_secret, $oauth_token, $oauth_token_secret) {
-          $connection = new TwitterOAuth($cons_key, $cons_secret, $oauth_token, $oauth_token_secret); // connect to Twitter via OAuth
+        // function connectToTwitter($cons_key, $cons_secret, $oauth_token, $oauth_token_secret) {
+        function connectToTwitter() {
+          $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET); // connect to Twitter via OAuth
           return $connection; // return the connection so we can use it
         }
            
-        $connection = connectToTwitter($consumerkey, $consumersecret, $accesstoken, $accesstokensecret); // call Twitter connection function
+        // $connection = connectToTwitter($consumerkey, $consumersecret, $accesstoken, $accesstokensecret); // call Twitter connection function
+        $connection = connectToTwitter();
         // hopefully connection worked
         $tweets = $connection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$userName."&count=".$returnedTweetsLimit); // get the tweets for the specified user
          
         return ($tweets);
     }
+
+
+// This was an attempt to handle users that don't exist. It doesn't work.
+//     function find_users(array $users)
+//     {
+//         $foundUser = array();
+
+//         $toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
+
+//     // Up to 100 users per request.
+//         $userAry = array_slice($users, 0, 100);
+
+//     // Init with "not found" for all users.
+//         foreach ($userAry as $user) {
+//             $foundUser[$user] = false;
+//         }
+
+//     // Find existing users by "screen_name".
+//         $userObjs= $toa->post('users/lookup', array('screen_name' => implode(',', $userAry)));
+
+//     // Set "found" for existing users.
+//         foreach ($userObjs as $userObj) {
+//             $foundUser[$userObj->screen_name] = true;
+//         }
+
+// if (count(array_unique($foundUser)) === 1 && $foundUser[0] === 'false') {
+//     echo 'User does not exist.';
+
+// }
+
+//         return $foundUser;
+//     }
+//     $users = array($userName);
+//     $foundUser = find_users($users);
+//     var_dump($foundUser);
 
     $tweets = getTweets($userName); // call the function to fetch user tweets
     foreach ($tweets as $line) { // step through each returned tweet
@@ -44,8 +86,8 @@
     // get_bananas();
 
     // DEBUG
-    echo '<p>Anything below this line is for debug purposes. Nothing to see here.</p><br />';
-    echo '<br /><img src="test.gif">'; // if this line returns an image, PHP is writing properly AND permisions are OK. Probabaly.
+    // echo '<p>Anything below this line is for debug purposes. Nothing to see here.</p><br />';
+    // echo '<br /><img src="test.gif">'; // if this line returns an image, PHP is writing properly AND permisions are OK. Probabaly.
 ?>
 </body>
 </html>
