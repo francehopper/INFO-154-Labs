@@ -1,16 +1,19 @@
 <doctype html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="main.css">
+
 <title>Twitter Lab > Home</title>
 </head>
 <body>
 
-<div align="center">
-	<form name="input" action="" method="GET">
-		Search Twitter: <input type="text" name="tweet">
-		<input type="submit" value="Submit"><br>
-		<input type="radio" name="profile" value="profile">Search Profile<br>
-		<input type="radio" name="tweet" value="tweet">Search For Tweet<br>
+<div class="div">
+
+
+	<form name="input" action="getUserTweets.php" method="GET">
+		<p class="search">Search Twitter</p> <input type="text" name="tweet" class="input"><br>
+		<input type="submit" value="Search for Profile">
+		<input type="submit" value="Search For Tweet">
 
 
 
