@@ -8,7 +8,8 @@
     // In loving memory of Gregory Woods' brain after realizing it was a XAMPP issue. And for the initial suffering and code shell.
     require_once('banana.php');
     require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
-    $userName = "francehopper"; // hardcoded for now because it's easier. Deal with it.
+    $userName = $_GET['userString'];
+    // $userName = "PlayStation"; // hardcoded for now because it's easier. Deal with it.
 
     // new function-based code to fetch tweets
     function getTweets($userName) { 
