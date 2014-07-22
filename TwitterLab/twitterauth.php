@@ -49,7 +49,7 @@ $settings = array(
 
 // Try to get latest tweets
 $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'; // define JSON URL hook
-$getfield = '?screen_name=francehopper'; // define paramater
+$getfield = '?screen_name=asdofijsdofisdofiasoijasdoi'; // define paramater
 $requestMethod = 'GET'; // define request method
 
 $twitter = new TwitterAPIExchange($settings); // spawn new request instance
