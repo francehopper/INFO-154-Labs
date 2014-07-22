@@ -10,6 +10,7 @@
     require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
     $userName = $_GET['userString']; // get the searched for user name
     // don't be a dick by stealing my keys
+    // We'll define the key values in case we need to share them across functions in the future
     define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');
     define('CONSUMER_SECRET', 'VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt');
     define('ACCESS_TOKEN', '16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg');
@@ -20,10 +21,11 @@
     function getTweets($userName) { 
         $returnedTweetsLimit = 20; // limit the number of returned tweets since JSON will hit a limit eventually anyway
         // don't be a dick by stealing my keys
-        $consumerkey = "aqEWrdsZtvnWskYXZe0Ui1dAs";
-        $consumersecret = "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt";
-        $accesstoken = "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg";
-        $accesstokensecret = "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO";
+        // disabled now that they are defined but left as a just-in-case fallback
+        // $consumerkey = "aqEWrdsZtvnWskYXZe0Ui1dAs";
+        // $consumersecret = "VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt";
+        // $accesstoken = "16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg";
+        // $accesstokensecret = "F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO";
           
         // function connectToTwitter($cons_key, $cons_secret, $oauth_token, $oauth_token_secret) {
         function connectToTwitter() {
@@ -73,7 +75,9 @@
 //     $users = array($userName);
 //     $foundUser = find_users($users);
 //     var_dump($foundUser);
-
+    
+    echo "<p>Tweets by " . $userName . "</p>";
+    echo "<p>Note: If you see the message 'Notice: Trying to get property of non-object in...' you are probabaly looking for a user that doesn't exist. Please try again.</p>";
     $tweets = getTweets($userName); // call the function to fetch user tweets
     foreach ($tweets as $line) { // step through each returned tweet
         $status = $line->text; // strip the Tweet from the JSON
@@ -83,9 +87,10 @@
         echo $outputTweet; // echo the tweet
     }
 
-    // get_bananas();
+    
 
     // DEBUG
+    // get_bananas();
     // echo '<p>Anything below this line is for debug purposes. Nothing to see here.</p><br />';
     // echo '<br /><img src="test.gif">'; // if this line returns an image, PHP is writing properly AND permisions are OK. Probabaly.
 ?>
