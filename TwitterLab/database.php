@@ -91,7 +91,7 @@ $connection = mysqli_connect('localhost:3308', 'infousr', 'D1oASa1', 'info154') 
 // }
 
 // query the table
-$result = mysqli_query($connection, "SELECT * FROM 'tweets'");
+$result = mysqli_query($connection, "SELECT * FROM tweets");
 
 // show results
 while($row = mysqli_fetch_array($result)) {
