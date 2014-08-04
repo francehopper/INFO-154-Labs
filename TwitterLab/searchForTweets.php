@@ -35,6 +35,7 @@
       $outputTweet = '<li><strong><a href="http://twitter.com/' . $handle .'">@' . $handle . "</a></strong>: " . $status .'</span> <a style="font-size:85%" href="http://twitter.com/'.$handle.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
       echo $outputTweet; // echo the tweet
   }
+
 ?>
 </body>
 </html>
