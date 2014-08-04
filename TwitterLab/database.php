@@ -77,7 +77,7 @@ db();*/
 // Stephen's stuff v
 
 // connect to mySQL
-$connection = mysqli_connect("localhost", "infousr", "D1oASa1", "info154.tweets") or die(mysqli_connect_error());
+$connection = mysqli_connect('localhost:3308', 'infousr', 'D1oASa1', 'info154') or die(mysqli_connect_error());
 // check that connection was OK
 // if (mysqli_connect_errno()) {
 // 	echo "Uh oh. Something went wrong while connecting to the database: " . mysqli_connect_error();
@@ -91,7 +91,7 @@ $connection = mysqli_connect("localhost", "infousr", "D1oASa1", "info154.tweets"
 // }
 
 // query the table
-$result = mysqli_query($connection,"SELECT * FROM 'info154.tweets'");
+$result = mysqli_query($connection, "SELECT * FROM 'tweets'");
 
 // show results
 while($row = mysqli_fetch_array($result)) {
