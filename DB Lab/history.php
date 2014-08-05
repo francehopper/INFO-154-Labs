@@ -14,9 +14,9 @@ $theQuery = 'select * from tweets where tweet_text like \'%'.$searchString.'%\''
 $result = mysqli_query($connection, $theQuery) or die(mysqli_error($connection)); // perform query
 
 // render navigation
-echo '<a href=\"home.html\"><- Return home</a>';
-echo ' | ';
-echo '<a href=\"liveSearch.php?userString='.$searchString.'\">View the latest tweets about '.$searchString.'</a><br />';
+echo "<a href=\"home.html\"><- Return home</a>";
+echo " | ";
+echo "<a href=\"liveSearch.php?userString='.$searchString.'\">View the latest tweets about '.$searchString.'</a><br />";
 
 // show results
 echo '<strong><p>Historical tweets about '.$searchString.':</p></strong>'; // render header
