@@ -85,7 +85,7 @@ $connection = mysqli_connect('totoro.hppr.co:3308', 'infousr', 'D1oASa1', 'info1
 $result = mysqli_query($connection, "SELECT * FROM tweets"); // change to fetch historical search results later
 
 // show results
-echo "Historical tweets about " . $result; // leave as-is
+echo "Historical tweets about Otakon"; // to be updated?
 while($row = mysqli_fetch_array($result)) {
   echo $row['user_name'] . " tweeted ";
 	echo $row['tweet_text'];
