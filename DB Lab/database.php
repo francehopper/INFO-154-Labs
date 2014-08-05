@@ -126,8 +126,9 @@ foreach ($tweets->statuses as $line) { // step through each returned tweet
   $outputTweet = '<li><strong><a href="http://twitter.com/' . $handle .'">@' . $handle . "</a></strong>: " . $status .'</span> <a style="font-size:85%" href="http://twitter.com/'.$handle.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
   echo $outputTweet; // echo the tweet
   // write tweet to database
-  mysqli_query($connection, "INSERT INTO tweets (tweet_text, user_name, tweet_time) VALUES ($status,$handle,$tweetTime)") or die (mysqli_error($connection));
-  // Note: SQL is configured to enforce unique tweet IDs, so duplicates should never occur
+  $thequery = 'insert into tweets (tweet_text, user_name, tweet_text) values ('.$status.','.$handle.','.$tweetTime.')';
+  // mysqli_query($connection, "INSERT INTO tweets (tweet_text, user_name, tweet_time) VALUES ($status,$handle,$tweetTime)") or die (mysqli_error($connection));
+  mysqli_query($connection, $thequery) or die (mysqli_error($connection));
 }
 
 
