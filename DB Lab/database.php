@@ -85,7 +85,7 @@ $connection = mysqli_connect('totoro.hppr.co:3308', 'infousr', 'D1oASa1', 'info1
 $result = mysqli_query($connection, "SELECT * FROM tweets"); // change to fetch historical search results later
 
 // show results
-echo "Historical tweets about Otakon"; // to be updated?
+echo "Historical tweets about Otakon <br />"; // to be updated?
 while($row = mysqli_fetch_array($result)) {
   echo $row['user_name'] . " tweeted ";
 	echo $row['tweet_text'];
@@ -126,8 +126,7 @@ foreach ($tweets->statuses as $line) { // step through each returned tweet
   $outputTweet = '<li><strong><a href="http://twitter.com/' . $handle .'">@' . $handle . "</a></strong>: " . $status .'</span> <a style="font-size:85%" href="http://twitter.com/'.$handle.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
   echo $outputTweet; // echo the tweet
   // write tweet to database
-  mysqli_query($connection, "INSERT INTO tweets (tweet_id, tweet_text, user_name, tweet_time)
-  VALUES ('$tweetId','$status','$handle','$tweetTime')");
+  mysqli_query($connection, "INSERT INTO tweets (tweet_id, tweet_text, user_name, tweet_time) VALUES ('$tweetId','$status','$handle','$tweetTime')") or die (mysqli_error($connection));
   // Note: SQL is configured to enforce unique tweet IDs, so duplicates should never occur
 }
 
