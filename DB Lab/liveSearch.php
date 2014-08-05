@@ -49,7 +49,7 @@ echo " | ";
 echo "<a href=\"history.php?userString=".$searchString."\">View historical tweets about ".$searchString."</a>";
 
 echo "<p>Latest tweets about " . $searchString . "</p>";
-$tweets = runSearch($query); // fetch tweets from our searchs
+$tweets = runSearch($query); // fetch tweets from our search
 
 foreach ($tweets->statuses as $line) { // step through each returned tweet
   $status = $line->text; // strip the Tweet from the JSON
