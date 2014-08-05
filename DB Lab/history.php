@@ -14,24 +14,27 @@ $theQuery = 'select * from tweets where tweet_text like \'%'.$searchString.'%\''
 $result = mysqli_query($connection, $theQuery) or die(mysqli_error($connection)); // perform query
 
 // render navigation
-echo "<a href=\"home.html\"><- Return home</a>";
-echo " | ";
-echo "<a href=\"liveSearch.php?userString=".$searchString."\">View the latest tweets about ".$searchString."</a><br />";
+echo '<a href=\"home.html\"><- Return home</a>';
+echo ' | ';
+echo '<a href=\"liveSearch.php?userString='.$searchString.'\">View the latest tweets about '.$searchString.'</a><br />';
 
 // show results
-echo "<strong><p>Historical tweets about ".$searchString.":</p></strong><br />"; // render header
-echo "<ul>"; // start list formating
+echo '<strong><p>Historical tweets about '.$searchString.':</p></strong>'; // render header
+echo '<ul>'; // start list formating
 while($row = mysqli_fetch_array($result)) {
-  echo "<li>"; // begin new list item
-  echo "<strong>@".$row['user_name'] . " </strong>tweeted "; // get who tweeted
-	echo $row['tweet_text']; // get what they tweeted
-  echo " on ";
-  echo $row['tweet_time']; // get when they tweeted
-	echo "<br>";
+  echo '<li><strong><a href="http://twitter.com/'.$row['user_name'].'@'.$row['user_name'].'</a></strong> tweeted '.$row['tweet_text'].' on '.$row['tweet_time'].'</li>'
+ //  echo "<li>"; // begin new list item
+ //  echo "<strong>@".$row['user_name'] . " </strong>tweeted "; // get who tweeted
+	// echo $row['tweet_text']; // get what they tweeted
+ //  echo " on ";
+ //  echo $row['tweet_time']; // get when they tweeted
+	// echo "<br>";
   echo "</li>"; // end list item
 }
-echo "</ul>"; // end list
+echo '</ul>'; // end list
 
+
+// $outputTweet = '<li><strong><a href="http://twitter.com/' . $handle .'">@' . $handle . "</a></strong>: " . $status .'</span> <a style="font-size:85%" href="http://twitter.com/'.$handle.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
 // close SQL connection
 mysqli_close($connection);
 
