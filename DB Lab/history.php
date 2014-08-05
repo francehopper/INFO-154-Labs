@@ -11,7 +11,7 @@ $connection = mysqli_connect('totoro.hppr.co:3308', 'infousr', 'D1oASa1', 'info1
 
 // query the table
 $theQuery = 'select from tweets where tweet_text like '.$searchString; // build SQL table query
-$result = mysqli_query($connection, $theQuery); // perform query
+$result = mysqli_query($connection, $theQuery) or die(mysqli_error($connection)); // perform query
 
 // render navigation
 echo "<a href=\"home.html\"><- Return home</a>";
@@ -19,7 +19,7 @@ echo " | ";
 echo "<a href=\"liveSearch.php?userString=".$searchString."\">View the latest tweets about ".$searchString."</a><br />";
 
 // show results
-echo "Historical tweets about ".$searchString."<br />"; // render header
+echo "Historical tweets about ".$searchString.":<br />"; // render header
 while($row = mysqli_fetch_array($result)) {
   echo $row['user_name'] . " tweeted ";
 	echo $row['tweet_text'];
