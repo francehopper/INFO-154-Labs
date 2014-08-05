@@ -19,7 +19,7 @@ echo " | ";
 echo "<a href=\"liveSearch.php?userString='.$searchString.'\">View the latest tweets about '.$searchString.'</a><br />";
 
 // show results
-echo '<strong><p>Historical tweets about '.$searchString.':</p></strong>'; // render header
+echo '<strong><p>Historical tweets about $searchString:</p></strong>'; // render header
 echo '<ul>'; // start list formating
 while($row = mysqli_fetch_array($result)) {
   echo '<li><strong><a href="http://twitter.com/'.$row['user_name'].'">@'.$row['user_name'].'</a></strong> tweeted '.$row['tweet_text'].' on '.$row['tweet_time'].'</li>';
