@@ -46,7 +46,7 @@ $query = array (
 // build navigation
 echo "<a href=\"home.html\"><- Return home</a>";
 echo " | ";
-echo "<a href=\"history.php\">View historical tweets about ".$searchString;
+echo "<a href=\"history.php?userString=".$searchString."\">View historical tweets about ".$searchString."</a>";
 
 echo "<p>Latest tweets about " . $searchString . "</p>";
 $tweets = runSearch($query); // fetch tweets from our searchs
