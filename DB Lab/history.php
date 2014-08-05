@@ -22,7 +22,7 @@ echo '<a href=\"liveSearch.php?userString='.$searchString.'\">View the latest tw
 echo '<strong><p>Historical tweets about '.$searchString.':</p></strong>'; // render header
 echo '<ul>'; // start list formating
 while($row = mysqli_fetch_array($result)) {
-  echo '<li><strong><a href="http://twitter.com/'.$row['user_name'].'@'.$row['user_name'].'</a></strong> tweeted '.$row['tweet_text'].' on '.$row['tweet_time'].'</li>'
+  echo '<li><strong><a href="http://twitter.com/'.$row['user_name'].'@'.$row['user_name'].'</a></strong> tweeted '.$row['tweet_text'].' on '.$row['tweet_time'].'</li>';
  //  echo "<li>"; // begin new list item
  //  echo "<strong>@".$row['user_name'] . " </strong>tweeted "; // get who tweeted
 	// echo $row['tweet_text']; // get what they tweeted
