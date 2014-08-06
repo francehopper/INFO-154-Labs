@@ -7,11 +7,11 @@ Schema = info154
 Table = tweets
 User = infousr
 Password = D1oASa1
-Permissions = All but administration tasks (meaning not a clone of root; just give permissions to read, write, and edit a table)
+Permissions = select, insert, update, delete (All in the Data category)
 Columns (in this order):
-tweet_text
-user_name
-tweet_time
-tweet_id
+tweet_text - varchar(150), not null
+user_name - varchar(80), not null
+tweet_time - varchar(80), not null
+tweet_id - int(11), not null, auto increment, PRIMARY KEY
 
 Don't steal my API keys. Or XANA will find you.
