@@ -110,6 +110,11 @@ foreach ($tweets->statuses as $line) { // step through each returned tweet
 // close SQL connection
 mysqli_close($connection);
 
+//EVerything below here is to compare two tables to find tweets that are the same.
+
+$compare = 'select tweets.tweet_text, tweets2.tweet_text from ".$searchString." t1, ".$searchString2." t2 WHERE t1.tweet_text == t2.tweet_text';
+mysqli_query($connection, $compare) or die (mysqli_error($connection));
+
 
 
 ?>
