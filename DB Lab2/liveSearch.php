@@ -26,7 +26,7 @@ $connection = mysqli_connect('totoro.hppr.co:3308', 'infousr', 'D1oASa1', 'info1
 
 require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
 $searchString = $_GET['userString']; // search for the provided string
-// $searchString = "Otakon"; // temp; DEBUG
+$searchString2 = $_GET['userString2']; // search for the provided string
 
 // don't be a dick by stealing my keys
 define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');
@@ -46,7 +46,7 @@ $query = array (
 // build navigation
 echo "<a href=\"home.html\"><- Return home</a>";
 echo " | ";
-echo "<a href=\"history.php?userString=".$searchString."\">View historical tweets about $searchString</a><br />";
+echo "<a href=\"history.php?userString=".$searchString."?userString2=".$searchString2."\">View historical tweets about $searchString</a><br />";
 
 echo '<strong><p>Latest tweets about '.$searchString.'</p></strong>';
 $tweets = runSearch($query); // fetch tweets from our search
@@ -71,7 +71,7 @@ mysqli_close($connection);
 $connection = mysqli_connect('totoro.hppr.co:3308', 'infousr', 'D1oASa1', 'info154') or die(mysqli_connect_error());
 
 require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
-$searchString2 = $_GET['userString2']; // search for the provided string
+//$searchString2 = $_GET['userString2']; // search for the provided string
 
 //define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');
 //define('CONSUMER_SECRET', 'VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt');
@@ -88,12 +88,12 @@ $query = array (
 );
 
 // build navigation
-echo "<a href=\"home.html\"><- Return home</a>";
-echo " | ";
-echo "<a href=\"history.php?userString=".$searchString2."\">View historical tweets about $searchString</a><br />";
+//echo "<a href=\"home.html\"><- Return home</a>";
+//echo " | ";
+//echo "<a href=\"history.php?userString=".$searchString2."\">View historical tweets about $searchString</a><br />";
 
 echo '<strong><p>Latest tweets about '.$searchString2.'</p></strong>';
-$tweets = runSearch($query); // fetch tweets from our search
+$tweets = runSearch2($query); // fetch tweets from our search
 
 foreach ($tweets->statuses as $line) { // step through each returned tweet
   $status = $line->text; // strip the Tweet from the JSON
