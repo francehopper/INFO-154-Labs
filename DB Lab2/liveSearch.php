@@ -73,10 +73,10 @@ $connection = mysqli_connect('totoro.hppr.co:3308', 'infousr', 'D1oASa1', 'info1
 require_once('oauth/twitteroauth/twitteroauth.php'); // https://github.com/abraham/twitteroauth
 $searchString2 = $_GET['userString2']; // search for the provided string
 
-define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');
-define('CONSUMER_SECRET', 'VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt');
-define('ACCESS_TOKEN', '16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg');
-define('ACCESS_TOKEN_SECRET', 'F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO');
+//define('CONSUMER_KEY', 'aqEWrdsZtvnWskYXZe0Ui1dAs');
+//define('CONSUMER_SECRET', 'VCtIhC9mUrAOlljEIhPJ98msypf5WgNofTxt0F7COFYohUiFZt');
+//define('ACCESS_TOKEN', '16427456-US1fjrhTqtBu3gj6Yg4H3u7gSYLFKVPxX0SVherWg');
+//define('ACCESS_TOKEN_SECRET', 'F72MrewmUhSlU9SkWY1dzEkkiB7sl47KrRDX4PMk91DhO');
 
 function runSearch2(array $query) {
   $conectionToTwitter = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET); // connect to Twitter API
