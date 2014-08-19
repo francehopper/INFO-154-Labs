@@ -33,12 +33,12 @@ echo '</ul>'; // end list
 mysqli_close($connection);
 
 //Everything below here is for the second search twitter.
-$searchString2 = $_GET['userString2'];
+$searchString = $_GET['userString2'];
 
 $connection = mysqli_connect('totoro.hppr.co:3308', 'infousr', 'D1oASa1', 'info154') or die(mysqli_connect_error());
 
-$theQuery2 = 'select * from tweets2 where tweet_text like \'%'.$searchString2.'%\''; // build SQL table query
-$result2 = mysqli_query($connection, $theQuery2) or die(mysqli_error($connection)); // perform query
+$theQuery = 'select * from tweets2 where tweet_text like \'%'.$searchString.'%\''; // build SQL table query
+$result = mysqli_query($connection, $theQuery) or die(mysqli_error($connection)); // perform query
 
 // render navigation
 echo "<a href=\"home.html\"><- Return home</a>";
@@ -46,7 +46,7 @@ echo " | ";
 echo "<a href=\"liveSearch.php?userString=$searchString\">View the latest tweets about $searchString</a><br />";
 
 // show results
-echo '<strong><p>Historical tweets about '.$searchString2.':</p></strong>'; // render header
+echo '<strong><p>Historical tweets about '.$searchString.':</p></strong>'; // render header
 echo '<ul>'; // start list formating
 while($row = mysqli_fetch_array($result)) {
   // display saved tweets
