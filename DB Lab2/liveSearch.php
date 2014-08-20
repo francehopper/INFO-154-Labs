@@ -112,15 +112,20 @@ foreach ($tweets->statuses as $line) { // step through each returned tweet
 // Greg is an idiot and put this AFTER we closed the SQL connection
 // $compare = 'select tweets.tweet_text, tweets2.tweet_text from '.$searchString.' t1, '.$searchString2.' t2 WHERE t1.tweet_text = t2.tweet_text';
 
+// build the stupidly complex compare statement
 $compare = 'select tweets.tweet_text
 from tweets
 inner join tweets2
 on tweets.tweet_text=tweets2.tweet_text
 where tweets.tweet_text
 like \'%'.$searchString.'%\'';
+// run it
 $result = mysqli_query($connection, $compare) or die (mysqli_error($connection));
+// return results
 while($row = mysqli_fetch_array($result)) {
+	echo "<br />";
 	echo $row['tweet_text'];
+	echo "<br />";
 }
 
 
