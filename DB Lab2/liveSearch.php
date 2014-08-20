@@ -125,7 +125,7 @@ $result = mysqli_query($connection, $compare) or die (mysqli_error($connection))
 echo '<strong><p>Tweets that are the same between keywords ' .$searchString. ' and ' .$searchString2.'</p></strong>';
 while($row = mysqli_fetch_array($result)) {
 	echo "<br />";
-	echo '<li><strong>$row['tweet_text'];</strong></li>'
+	echo '<li><strong>$row['tweet_text'];</strong></li>';
 	echo "<br />";
 }
 
