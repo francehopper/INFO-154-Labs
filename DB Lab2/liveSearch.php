@@ -117,8 +117,11 @@ from tweets
 inner join tweets2
 on tweets.tweet_text=tweets2.tweet_text
 where tweets.tweet_text
-like \'%$searchString%\'';
-mysqli_query($connection, $compare) or die (mysqli_error($connection));
+like \'%$searchString%\' and \'%$searchString2%\'';
+$result = mysqli_query($connection, $compare) or die (mysqli_error($connection));
+while($row = mysqli_fetch_array($result)) {
+	echo $row['tweet_text'];
+}
 
 
 // close SQL connection
