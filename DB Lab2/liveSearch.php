@@ -8,10 +8,7 @@
 // connect to mySQL
 $connection = mysqli_connect('totoro.hppr.co:3308', 'infousr', 'D1oASa1', 'info154') or die(mysqli_connect_error());
 
-// Moving to history.php
-// // DEBUG
-// // query the table
-// $result = mysqli_query($connection, "SELECT * FROM tweets"); // change to fetch historical search results later
+
 
 // // show results
 // echo "Historical tweets about Otakon <br />"; // to be updated?
@@ -58,6 +55,7 @@ foreach ($tweets->statuses as $line) { // step through each returned tweet
   $tweetId = $line->id_str; // strip the tweet ID so we can link back to the source tweet
   $outputTweet = '<li><strong><a href="http://twitter.com/' . $handle .'">@' . $handle . "</a></strong>: " . $status .'</span> <a style="font-size:85%" href="http://twitter.com/'.$handle.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
   echo $outputTweet; // echo the tweet
+  // $strip = str_replace("'", "", $status);
   // write tweet to database
   $thequery = 'insert into tweets (tweet_text, user_name, tweet_time) values ("'.$status.'","'.$handle.'","'.$tweetTime.'")';
   mysqli_query($connection, $thequery) or die (mysqli_error($connection));
@@ -102,21 +100,29 @@ foreach ($tweets->statuses as $line) { // step through each returned tweet
   $tweetId = $line->id_str; // strip the tweet ID so we can link back to the source tweet
   $outputTweet = '<li><strong><a href="http://twitter.com/' . $handle .'">@' . $handle . "</a></strong>: " . $status .'</span> <a style="font-size:85%" href="http://twitter.com/'.$handle.'/statuses/'.$tweetId.'">'. $tweetTime .'</a></li>'; // Render our beautiful new tweet
   echo $outputTweet; // echo the tweet
+  // $strip = str_replace("'", "", $status);
   // write tweet to database
   $thequery = 'insert into tweets2 (tweet_text, user_name, tweet_time) values ("'.$status.'","'.$handle.'","'.$tweetTime.'")';
   mysqli_query($connection, $thequery) or die (mysqli_error($connection));
 }
 
-// close SQL connection
-mysqli_close($connection);
+
 
 //EVerything below here is to compare two tables to find tweets that are the same.
+// Greg is an idiot and put this AFTER we closed the SQL connection
+// $compare = 'select tweets.tweet_text, tweets2.tweet_text from '.$searchString.' t1, '.$searchString2.' t2 WHERE t1.tweet_text = t2.tweet_text';
 
-$compare = 'select tweets.tweet_text, tweets2.tweet_text from ".$searchString." t1, ".$searchString2." t2 WHERE t1.tweet_text == t2.tweet_text';
+$compare = 'select tweets.tweet_text
+from tweets
+inner join tweets2
+on tweets.tweet_text=tweets2.tweet_text
+where tweets.tweet_text
+like \'%$searchString%\'';
 mysqli_query($connection, $compare) or die (mysqli_error($connection));
 
 
-
+// close SQL connection
+mysqli_close($connection);
 ?>
 </body>
 </html>
