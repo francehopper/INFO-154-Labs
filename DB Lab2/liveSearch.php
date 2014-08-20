@@ -126,7 +126,7 @@ echo '<strong><p>Tweets that are the same between keywords ' .$searchString. ' a
 echo '<ul>';
 while($row = mysqli_fetch_array($result)) {
 	// echo "<br />";
-	echo '<li><strong>'.$row.['tweet_text']'</strong></li>';
+	echo '<li><strong>'.$row['tweet_text'].'</strong></li>';
 	// echo "<br />";
 }
 echo '</ul>';
