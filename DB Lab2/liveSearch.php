@@ -123,11 +123,13 @@ like \'%'.$searchString.'%\'';
 $result = mysqli_query($connection, $compare) or die (mysqli_error($connection));
 // return results
 echo '<strong><p>Tweets that are the same between keywords ' .$searchString. ' and ' .$searchString2.'</p></strong>';
+echo '<ul>';
 while($row = mysqli_fetch_array($result)) {
-	echo "<br />";
-	echo '<li><strong>'$row['tweet_text']'</strong></li>';
-	echo "<br />";
+	// echo "<br />";
+	echo '<li><strong>'.$row.['tweet_text']'</strong></li>';
+	// echo "<br />";
 }
+echo '</ul>';
 
 
 // close SQL connection
